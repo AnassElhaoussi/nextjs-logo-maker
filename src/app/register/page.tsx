@@ -11,6 +11,13 @@ const Register = () => {
     password: "",
     confirmedPassword: "",
   });
+  const [error, setError] = useState<{
+    isError: boolean,
+    errorMessage: string | null
+  }>({
+    isError: false,
+    errorMessage: null
+  });
 
   // This functions appends the value of each modified input to the user state
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,15 +32,29 @@ const Register = () => {
 
   // This function sends an axios request to the /register endpoint to create a user
   const registerUser = () => {
-    if(Object.values(user).every(value => value.length !== 0)) {
-        if(user.password === user.confirmedPassword) {
-            const {email, password} = user
-            // Sending an axios request 
-        } else {
-            // Send an error if the two values do not match
-        }
+    if (Object.values(user).every((value) => value.trim().length !== 0)) {
+      if (user.password === user.confirmedPassword) {
+        const { email, password } = user;
+        // Sending an axios request
+      } else {
+        // Send an error if the two values do not match
+        setError({
+            isError: true,
+            errorMessage: "The two passwords do not match, try again"
+        })
+      }
     } else {
-        // Send an error if an input field is empty
+      // Send an error if an input field is empty
+      const missingFields = Object.keys(user)
+      .filter(
+        (key: string) => user[key as keyof typeof user].trim().length === 0
+        )
+      setError({
+        isError: true,
+        errorMessage: missingFields.length === 1 
+        ? `${missingFields} input field is empty!` 
+        : `${missingFields} input fields are empty!`
+      })
     }
   };
 
