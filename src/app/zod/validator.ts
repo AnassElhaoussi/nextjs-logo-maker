@@ -1,9 +1,7 @@
 import { schema } from "."
-export default function isAuthValid(
-    body: {
-        email: string,
-        password: string
-    }) {
+import { ReqBodyType } from "@/types"
+
+export function isAuthValid(body: ReqBodyType) {
     const response = schema.safeParse(body)
     if (!response.success) {
         return {

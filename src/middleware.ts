@@ -1,14 +1,13 @@
-import { NextResponse } from "next/server"
-
-import type { NextApiRequest, NextApiResponse } from "next"
-import isAuthValid from "@/app/zod/validator"
+import { NextResponse } from "next/server";
+import { isAuthValid } from "./app/zod/validator";
 import { ZodError } from "zod"
+import { ReqBodyType } from "./types";
 
-export default function middleware(req: NextApiRequest) {
+export function middleware(req: Request) {
     const { valid, error }: {
         valid: boolean,
         error: ZodError<{ email: string, password: string }> | null
-    } = isAuthValid(req.body)
+    } = isAuthValid(req.body as ReqBodyType)
     if (!valid) {
         NextResponse.json({
             status: 400,
@@ -16,4 +15,8 @@ export default function middleware(req: NextApiRequest) {
             errors: error?.errors
         })
     } else NextResponse.next()
+}
+
+export const config = {
+    matcher: '/api/register'
 }
