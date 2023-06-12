@@ -14,7 +14,10 @@ export function middleware(req: Request) {
             message: "Invalid request",
             errors: error?.errors
         })
-    } else NextResponse.next()
+    } else {
+        NextResponse.next()
+        NextResponse.json({message: "middleware is working"})
+    }
 }
 
 export const config = {
