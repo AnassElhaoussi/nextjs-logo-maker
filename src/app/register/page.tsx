@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { checkMissingInputFields } from "@/utils";
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -12,11 +13,11 @@ const Register = () => {
     confirmedPassword: "",
   });
   const [error, setError] = useState<{
-    isError: boolean,
-    errorMessage: string | null
+    isError: boolean;
+    errorMessage: string | null | undefined;
   }>({
     isError: false,
-    errorMessage: null
+    errorMessage: null,
   });
 
   // This functions appends the value of each modified input to the user state
@@ -31,7 +32,8 @@ const Register = () => {
   };
 
   // This function sends an axios request to the /register endpoint to create a user
-  const registerUser = () => {
+  const registerUser = (e: React.SyntheticEvent) => {
+    e.preventDefault()
     if (Object.values(user).every((value) => value.trim().length !== 0)) {
       if (user.password === user.confirmedPassword) {
         const { email, password } = user;
@@ -39,22 +41,19 @@ const Register = () => {
       } else {
         // Send an error if the two values do not match
         setError({
-            isError: true,
-            errorMessage: "The two passwords do not match, try again"
-        })
+          isError: true,
+          errorMessage: "The two passwords do not match, try again!",
+        });
       }
     } else {
       // Send an error if an input field is empty
       const missingFields = Object.keys(user)
-      .filter(
-        (key: string) => user[key as keyof typeof user].trim().length === 0
-        )
+      .filter((key: string) => user[key as keyof typeof user].trim().length === 0);
+      const errorMessage = checkMissingInputFields(missingFields)
       setError({
         isError: true,
-        errorMessage: missingFields.length === 1 
-        ? `${missingFields} input field is empty!` 
-        : `${missingFields} input fields are empty!`
-      })
+        errorMessage
+      });
     }
   };
 
@@ -93,6 +92,9 @@ const Register = () => {
           />
         </div>
         <button type="submit">Submit</button>
+        {error.isError && (
+            <span>{error.errorMessage}</span>
+        )}
       </form>
     </main>
   );
