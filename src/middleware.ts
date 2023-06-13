@@ -9,7 +9,7 @@ export async function middleware(req: Request) {
     const body = await req.json()
     const { valid, error }: {
         valid: boolean,
-        error: ZodError<{ email: string, password: string }> | null
+        error: string | null
     } = isAuthValid(body as ReqBodyType)
     // Checking if the user's credentials are valid
 
