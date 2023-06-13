@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import {z} from 'zod'
 
 // creating zod schema
 export const schema = z.object({
