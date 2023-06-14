@@ -17,6 +17,3 @@ export function isAuthValid(body: ReqBodyType) {
     }
 }
 
-
-
-
