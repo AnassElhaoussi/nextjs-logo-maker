@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt'
-import prisma from '../../../../lib/prisma'
+import prisma from '../../../lib/prisma'
+import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
-import {Prisma} from '@prisma/client'
 
 
 export async function POST(req: Request) {
 
     const saltRounds = 30
     // Getting the user's credentials from the request object
-    const {email, password} = await req.json()
+    const { email, password } = await req.json()
     // Generating the salt
     const salt = await bcrypt.genSalt(saltRounds)
     // Hashing the password
@@ -25,17 +25,18 @@ export async function POST(req: Request) {
         return NextResponse.json({
             status: 200,
             message: "successfully created the user!",
-        })
-    } catch(e) {
+        }, { status: 200 })
+    } catch (e) {
         // Checking if it's a unique constraint violation
-        if(e instanceof Prisma.PrismaClientKnownRequestError) {
-            if(e.code === "P2002") {
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            if (e.code === "P2002") {
                 return NextResponse.json({
-                    status: 400,
                     error: "A user cannot be created with this email. This email already exists"
-                })
+                }, { status: 400 })
             }
         }
-        throw e
+        return NextResponse.json({
+            error: e
+        })
     }
 }

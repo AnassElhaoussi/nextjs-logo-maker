@@ -15,9 +15,10 @@ export async function middleware(req: Request) {
 
     if (!valid) {
         return NextResponse.json({
-            status: 400,
             message: "Invalid request!",
             error
+        }, {
+            status: 400
         })
     } else {
         return NextResponse.next()

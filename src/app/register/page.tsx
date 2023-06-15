@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { checkMissingInputFields } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
-import signUpUser from "../../../API";
+import signUpUser from "../../axios";
 import { useRouter } from "next/router";
+
+
 const Register = () => {
   const [user, setUser] = useState<{
     email: string;
@@ -40,6 +42,7 @@ const Register = () => {
     onError: (error: string) => setError({isError: true, errorMessage: error})
   })
 
+  // Registering the user
   const registerUser = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (Object.values(user).every((value) => value.trim().length !== 0)) {
@@ -69,9 +72,9 @@ const Register = () => {
 
 
   return (
-    <main>
+    <form onSubmit={registerUser}>
       <h1>Sign up to our application</h1>
-      <form action="" onSubmit={registerUser}>
+      <div>
         <div>
           <label htmlFor="">Email</label>
           <input
@@ -106,8 +109,8 @@ const Register = () => {
         {error.isError && (
             <span>{error.errorMessage}</span>
         )}
-      </form>
-    </main>
+      </div>
+    </form>
   );
 };
 
