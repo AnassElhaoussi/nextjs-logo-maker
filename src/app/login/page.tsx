@@ -6,6 +6,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<null | string>(null)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name
@@ -18,7 +19,12 @@ const Login = () => {
   }
 
   const loginUser = () => {
-    // Should be login the user
+    // This is making sure that the input field is not empty
+    if(Object.values(user).every((value) => value.trim().length !== 0)){
+
+    } else {
+        setError("Some fields are empty, try again!")
+    }
   }
   return (
     <form action="" onSubmit={loginUser}>
