@@ -43,7 +43,7 @@ const Register = () => {
   })
 
   // Registering the user
-  const registerUser = (e: React.SyntheticEvent) => {
+  const handleSignup = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (Object.values(user).every((value) => value.trim().length !== 0)) {
       if (user.password === user.confirmedPassword) {
@@ -72,7 +72,7 @@ const Register = () => {
 
 
   return (
-    <form onSubmit={registerUser}>
+    <form onSubmit={handleSignup}>
       <h1>Sign up to our application</h1>
       <div>
         <div>
