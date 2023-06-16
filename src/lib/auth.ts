@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
                     if (!isPasswordValid) return null
                     return {
                         id: user.id,
-                        username: "",
+                        username: user.email.slice(0, user.email.indexOf('@')),
                         email: user.email
                     } as any
                 }

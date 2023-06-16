@@ -36,7 +36,7 @@ const Login = () => {
 
         if (!res?.error) router.push("/dashboard");
         setLoading(false);
-        setError("Invalid email or password, try again!");
+        setError("Invalid credentials, try again!");
       } catch (error: any) {
         setLoading(false);
         setError(error);
