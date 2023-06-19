@@ -4,6 +4,7 @@ import { ReqBodyType } from "./types";
 import { authOptions } from "./lib/auth";
 import { getServerSession } from "next-auth";
 
+// A custom function that returns the session object and a boolean to check if the user is authenticated
 export const getSessionData = async () => {
     const session = await getServerSession(authOptions)
     return {

@@ -1,8 +1,6 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import {redirect} from 'next/navigation'
-
+import { getServerSession } from "next-auth"
 const Dashboard = async () => {
+    const session = await getServerSession()
     return (
         <div></div>
     )
