@@ -1,17 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthValid } from "./zod/validator";
 import { ReqBodyType } from "./types";
-import { authOptions } from "./lib/auth";
-import { getServerSession } from "next-auth";
-
-// A custom function that returns the session object and a boolean to check if the user is authenticated
-export const getSessionData = async () => {
-    const session = await getServerSession(authOptions)
-    return {
-        authenticated: !!session,
-        session
-    }
-}
+import {withAuth} from 'next-auth/middleware'
 
 // Middleware function for user credentials validation (fires before the request is sent)
 export async function middleware(req: NextRequest) {
@@ -35,14 +25,12 @@ export async function middleware(req: NextRequest) {
             return NextResponse.next()
         }
     }
-    // Another middleware that fires whenever a user tries to access the dashboard page
+    // An authorization middleware that fires whenever a user tries to access the dashboard page
     if (req.nextUrl.pathname.startsWith('/dashboard')) {
-        // Getting the session data from the exported function
-        const sessionData = await getSessionData()
-        if (!sessionData.authenticated) {
-            // Redirecting the user to the /register route if he's not authenticated
-            return NextResponse.redirect(new URL('/register', req.nextUrl))
-        }
-        return NextResponse.next()
+        withAuth({
+            callbacks: {
+                authorized: ({token}) => !!token
+            }
+        })
     }
 }

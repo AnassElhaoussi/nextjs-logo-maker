@@ -1,8 +1,7 @@
-import prisma from "./prisma";
+import {prisma} from './prisma'
 import type { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt'
-
 
 export const authOptions: NextAuthOptions = {
     pages: {
@@ -38,13 +37,14 @@ export const authOptions: NextAuthOptions = {
                     const isPasswordValid = await bcrypt
                         .compare(
                             credentials?.password as string | Buffer,
-                            user.hashedPassword
+                            user.password
                         )
                     if (!isPasswordValid) return null
                     return {
                         id: user.id,
-                        username: user.email.slice(0, user.email.indexOf('@')),
-                        email: user.email
+                        username: user.username,
+                        email: user.email,
+                        profilePicture: user.profilePicture
                     } as any
                 }
                 return null
@@ -58,6 +58,7 @@ export const authOptions: NextAuthOptions = {
                 user: {
                     ...session.user,
                     id: token.id,
+                    username: token.username,
                 },
             };
         },
@@ -66,7 +67,9 @@ export const authOptions: NextAuthOptions = {
                 const u = user as unknown as any;
                 return {
                     ...token,
+                    username: u.username,
                     id: u.id,
+                    profilePicture: u.profilePicture
                 };
             }
             return token;

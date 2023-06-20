@@ -70,6 +70,7 @@ const Login = () => {
           />
         </div>
         <button type="submit">Submit</button>
+        {error && <span>{error}</span>}
       </div>
     </form>
   );
