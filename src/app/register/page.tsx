@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { checkMissingInputFields } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
 import signUpUser from "../../axios";
-import { useRouter } from "next/router";
-
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -38,8 +37,15 @@ const Register = () => {
 
   // This function sends an axios request to the /register endpoint to create a user
   const {mutate, isLoading} = useMutation(signUpUser, {
-    onSuccess: () => router.push('/login'),
-    onError: (error: string) => setError({isError: true, errorMessage: error})
+    onSuccess: () => {
+      router.push("/login")
+    },
+    onError: (axiosError: any) => {
+      setError({
+      isError: true,
+      errorMessage: axiosError.response.data.error
+    })
+  }
   })
 
   // Registering the user
