@@ -4,6 +4,7 @@ import { checkMissingInputFields } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
 import signUpUser from "../../axios";
 import { useRouter } from "next/navigation";
+import {Flex, Button} from '@chakra-ui/react'
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -79,8 +80,11 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSignup}>
-      <h1>Sign up to our application</h1>
-      <div>
+      <Flex direction='column'>
+        <h1>Hello there!</h1>
+        <span>Sign up to our application</span>
+      </Flex>
+      <Flex direction='column'>
         <div>
           <label htmlFor="">Email</label>
           <input
@@ -111,11 +115,13 @@ const Register = () => {
             placeholder="Confirm your password"
           />
         </div>
-        <button type="submit">Submit</button>
+        <Button 
+        type="submit" 
+        colorScheme="blue">Submit</Button>
         {error.isError && (
             <span>{error.errorMessage}</span>
         )}
-      </div>
+      </Flex>
     </form>
   );
 };
