@@ -5,6 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import signUpUser from "../../axios";
 import { useRouter } from "next/navigation";
 import {Flex, Button} from '@chakra-ui/react'
+import Image from "next/image";
+import { hairyKnotImg } from "@/assets";
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -79,50 +81,64 @@ const Register = () => {
 
 
   return (
-    <form onSubmit={handleSignup}>
-      <Flex direction='column'>
-        <h1>Hello there!</h1>
-        <span>Sign up to our application</span>
-      </Flex>
-      <Flex direction='column'>
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            type="text"
-            name="email"
-            value={user.email}
-            onChange={onChange}
-            placeholder="Enter your email"
-          />
+      <main className="flex w-full">
+        <div className="relative flex items-center justify-center h-screen w-1/2 bg-blue-100">
+          <div className="pl-10">
+            <Image alt="signup_form_image" src={hairyKnotImg} className="w-[29rem]" />
+          </div>
+          <div className="w-1/3"></div>
         </div>
-        <div>
-          <label htmlFor="">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={onChange}
-            placeholder="Create a password"
-          />
-        </div>
-        <div>
-          <label htmlFor="">Confirm password</label>
-          <input
-            type="password"
-            name="confirmedPassword"
-            value={user.confirmedPassword}
-            onChange={onChange}
-            placeholder="Confirm your password"
-          />
-        </div>
-        <Button 
-        type="submit" 
-        colorScheme="blue">Submit</Button>
-        {error.isError && (
-            <span>{error.errorMessage}</span>
-        )}
-      </Flex>
-    </form>
+        <form onSubmit={handleSignup} 
+        className="flex items-center justify-center h-screen w-1/2 px-10">
+          <Flex direction="column">
+            <Flex direction='column' gap={2}>
+              <h1>Hello there!</h1>
+              <span>Sign up to our application</span>
+            </Flex>
+              <Flex direction='column' gap={2}  >
+                <div>
+                  <label htmlFor="">Email</label>
+                  <input
+                    type="text"
+                    name="email"
+                    value={user.email}
+                    onChange={onChange}
+                    placeholder="Enter your email"
+                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={user.password}
+                    onChange={onChange}
+                    placeholder="Create a password"
+                    className="py-2 px-4 outline-none rounded-full"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="">Confirm password</label>
+                  <input
+                    type="password"
+                    name="confirmedPassword"
+                    value={user.confirmedPassword}
+                    onChange={onChange}
+                    placeholder="Confirm your password"
+                    className="py-2 px-4 outline-none rounded-full"
+                  />
+                </div>
+                <Button 
+                type="submit" 
+                colorScheme="blue">Submit</Button>
+                {error.isError && (
+                    <span>{error.errorMessage}</span>
+                )}
+              </Flex>
+          </Flex>
+        </form>
+      </main>
   );
 };
 
