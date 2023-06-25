@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {Flex, Button} from '@chakra-ui/react'
 import Image from "next/image";
 import { hairyKnotImg } from "@/assets";
+import Link from "next/link";
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -81,22 +82,22 @@ const Register = () => {
 
 
   return (
-      <main className="flex w-full">
-        <div className="relative flex items-center justify-center h-screen w-1/2 bg-blue-100">
+      <main className="flex w-full bg-[#EBEBEB]">
+        <div className="relative flex items-center justify-center h-screen w-1/2">
           <div className="pl-10">
             <Image alt="signup_form_image" src={hairyKnotImg} className="w-[29rem]" />
           </div>
-          <div className="w-1/3"></div>
+          <div className="absolute w-1/3 h-96 bg-[#23616F] rounded-2xl"></div>
         </div>
         <form onSubmit={handleSignup} 
         className="flex items-center justify-center h-screen w-1/2 px-10">
-          <Flex direction="column">
-            <Flex direction='column' gap={2}>
-              <h1>Hello there!</h1>
-              <span>Sign up to our application</span>
+          <Flex direction="column" gap={4}>
+            <Flex direction='column'>
+              <h1 className="text-5xl text-[#23616F] font-black">Hello there!</h1>
+              <span className="text-sm text-[#343333] font-normal ">Sign up to our application</span>
             </Flex>
               <Flex direction='column' gap={2}  >
-                <div>
+                <Flex direction="column" gap={1}>
                   <label htmlFor="">Email</label>
                   <input
                     type="text"
@@ -106,8 +107,8 @@ const Register = () => {
                     placeholder="Enter your email"
                     className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
                   />
-                </div>
-                <div>
+                </Flex>
+                <Flex direction="column" gap={1}>
                   <label htmlFor="">Password</label>
                   <input
                     type="password"
@@ -115,10 +116,10 @@ const Register = () => {
                     value={user.password}
                     onChange={onChange}
                     placeholder="Create a password"
-                    className="py-2 px-4 outline-none rounded-full"
+                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
                   />
-                </div>
-                <div>
+                </Flex>
+                <Flex direction="column" gap={1}>
                   <label htmlFor="">Confirm password</label>
                   <input
                     type="password"
@@ -126,15 +127,15 @@ const Register = () => {
                     value={user.confirmedPassword}
                     onChange={onChange}
                     placeholder="Confirm your password"
-                    className="py-2 px-4 outline-none rounded-full"
+                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
                   />
-                </div>
-                <Button 
-                type="submit" 
-                colorScheme="blue">Submit</Button>
-                {error.isError && (
-                    <span>{error.errorMessage}</span>
-                )}
+                </Flex>
+                <Flex>
+                  <button
+                  type="submit" 
+                  className="py-2 px-5 rounded-full text-white bg-[#23616F]">Submit</button>
+                  <span>Already have an account ? <Link href="/login">Login</Link></span>
+                </Flex>
               </Flex>
           </Flex>
         </form>
