@@ -8,6 +8,12 @@ import {Flex, Button} from '@chakra-ui/react'
 import Image from "next/image";
 import { hairyKnotImg } from "@/assets";
 import Link from "next/link";
+import {Poppins} from "next/font/google"
+
+export const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ['latin']
+})
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -82,59 +88,62 @@ const Register = () => {
 
 
   return (
-      <main className="flex w-full bg-[#EBEBEB]">
-        <div className="relative flex items-center justify-center h-screen w-1/2">
+      <main className="flex w-full bg-gradient-to-b from-[#e9e9e9] to-white gap-10" style={poppins.style}>
+        <div className="relative sm:flex hidden items-center justify-center h-screen w-1/2 ">
           <div className="pl-10">
-            <Image alt="signup_form_image" src={hairyKnotImg} className="w-[29rem]" />
+            <Image alt="signup_form_image" src={hairyKnotImg} className="relative z-1 w-[32rem] z-10" />
           </div>
-          <div className="absolute w-1/3 h-96 bg-[#23616F] rounded-2xl"></div>
+          <div className="absolute -z-1 left-1/3 w-1/2 md:h-[32rem] h-[20rem] bg-[#23616F] rounded-[2rem] shadow-2xl"></div>
         </div>
         <form onSubmit={handleSignup} 
-        className="flex items-center justify-center h-screen w-1/2 px-10">
-          <Flex direction="column" gap={4}>
+        className="flex items-center justify-center h-screen sm:w-1/2 w-full pr-10">
+          <Flex direction="column" gap="3rem">
             <Flex direction='column'>
-              <h1 className="text-5xl text-[#23616F] font-black">Hello there!</h1>
-              <span className="text-sm text-[#343333] font-normal ">Sign up to our application</span>
+              <h1 className="lg:text-8xl md:text-7xl sm:text-6xl text-7xl text-[#23616F] font-[800] ">Hi there!</h1>
+              <span className="md:text-sm text-xs text-[#343333] font-normal ">Sign up to IconAI and enjoy our free plan!</span>
             </Flex>
-              <Flex direction='column' gap={2}  >
-                <Flex direction="column" gap={1}>
-                  <label htmlFor="">Email</label>
+              <Flex direction='column' gap="1.5rem" className="w-[20rem] ">
+                <Flex direction="column" gap="0.5rem">
+                  <label htmlFor="" className="text-md">Email</label>
                   <input
                     type="text"
                     name="email"
                     value={user.email}
                     onChange={onChange}
                     placeholder="Enter your email"
-                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
+                    className="py-2 px-6 outline-none rounded-full bg-[#ececec] placeholder:text-sm"
                   />
                 </Flex>
-                <Flex direction="column" gap={1}>
-                  <label htmlFor="">Password</label>
+                <Flex direction="column" gap="0.5rem">
+                  <label htmlFor="" className="text-md">Password</label>
                   <input
                     type="password"
                     name="password"
                     value={user.password}
                     onChange={onChange}
                     placeholder="Create a password"
-                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
+                    className="py-2 px-6 outline-none rounded-full bg-[#ececec] placeholder:text-sm"
                   />
                 </Flex>
-                <Flex direction="column" gap={1}>
-                  <label htmlFor="">Confirm password</label>
+                <Flex direction="column" gap="0.5rem">
+                  <label htmlFor="" className="text-md">Confirm password</label>
                   <input
                     type="password"
                     name="confirmedPassword"
                     value={user.confirmedPassword}
                     onChange={onChange}
                     placeholder="Confirm your password"
-                    className="py-2 px-4 outline-none rounded-full w-3/4 bg-[#E3E3E3]"
+                    className="py-2 px-6 outline-none rounded-full bg-[#ececec] placeholder:text-sm"
                   />
                 </Flex>
-                <Flex>
+                {error.isError && (
+                  <span className="text-red-400 text-sm ">{error.errorMessage}</span>
+                )}
+                <Flex direction="column" gap="0.5rem" alignItems="start">
                   <button
                   type="submit" 
-                  className="py-2 px-5 rounded-full text-white bg-[#23616F]">Submit</button>
-                  <span>Already have an account ? <Link href="/login">Login</Link></span>
+                  className="py-2 px-10 rounded-full text-white bg-[#23616F] shadow-lg hover:px-14 transition-all">Submit</button>
+                  <span className="text-sm text-[#676565] ">Already have an account ? <Link href="/login">Login</Link></span>
                 </Flex>
               </Flex>
           </Flex>
