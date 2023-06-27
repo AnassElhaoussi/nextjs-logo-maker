@@ -48,7 +48,7 @@ const Register = () => {
   // This function sends an axios request to the /register endpoint to create a user
   const {mutate, isLoading} = useMutation(signUpUser, {
     onSuccess: () => {
-      router.push("/login")
+      window.location.href = "/login"
     },
     onError: (axiosError: any) => {
       setError({
