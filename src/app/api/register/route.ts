@@ -3,10 +3,9 @@ import {prisma} from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
-
 export async function POST(req: Request) {
-
-    const saltRounds = 30
+    
+    const saltRounds = 6
     // Getting the user's credentials from the request object
     const { email, password } = await req.json()
     // Generating the salt
@@ -16,7 +15,7 @@ export async function POST(req: Request) {
 
     try {
         // Creating a new user
-        await prisma.user.create({
+        const newUser = await prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,
@@ -29,6 +28,7 @@ export async function POST(req: Request) {
         return NextResponse.json({
             status: 200,
             message: "successfully created the user!",
+            user: newUser
         }, { status: 200 })
     } catch (e) {
         // Checking if it's a unique constraint violation
@@ -41,6 +41,6 @@ export async function POST(req: Request) {
         }
         return NextResponse.json({
             error: e
-        })
+        }, {status: 400})
     }
 }

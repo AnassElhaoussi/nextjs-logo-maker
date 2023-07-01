@@ -33,15 +33,15 @@ const Login = () => {
     if (Object.values(user).every((value) => value.trim().length !== 0)) {
       try {
         setLoading(true);
-        const res = await signIn("Login", {
+        const res = await signIn("credentials", {
           email: user.email,
           password: user.password,
           callbackUrl: "/dashboard",
           redirect: false,
         });
 
-        if (res?.url) router.push(res.url);
-        if (res?.error) setError(res.error);
+        if(res?.url) router.push(res.url)
+        if(res?.error) setError(res.error)
       } catch (error: any) {
         setLoading(false);
         setError(error);
@@ -58,7 +58,7 @@ const Login = () => {
       <div className="relative sm:flex hidden items-center justify-center h-screen w-1/2 ">
         <div className="pl-10">
           <Image
-            alt="signup_form_image"
+            alt="icon_ai_login_img"
             src={abstShapeImg}
             className="relative z-1 w-[32rem] z-10"
           />
@@ -115,7 +115,7 @@ const Login = () => {
                 Submit
               </button>
               <span className="text-sm text-[#676565] ">
-                Don't have an account ? <Link href="/register">Sign up</Link>
+                Don&apos;t have an account ? <Link href="/register">Sign up</Link>
               </span>
             </Flex>
           </Flex>

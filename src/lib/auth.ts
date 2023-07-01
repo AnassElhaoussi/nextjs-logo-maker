@@ -59,6 +59,7 @@ export const authOptions: NextAuthOptions = {
                     ...session.user,
                     id: token.id,
                     username: token.username,
+                    profilePicture: token.profilePicture
                 },
             };
         },
@@ -70,6 +71,7 @@ export const authOptions: NextAuthOptions = {
                     username: u.username,
                     id: u.id,
                     profilePicture: u.profilePicture
+                    
                 };
             }
             return token;

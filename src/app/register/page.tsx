@@ -9,6 +9,7 @@ import Image from "next/image";
 import { hairyKnotImg } from "@/assets";
 import Link from "next/link";
 import {Poppins} from "next/font/google"
+import { Spinner } from "@chakra-ui/react";
 
 export const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -48,7 +49,11 @@ const Register = () => {
   // This function sends an axios request to the /register endpoint to create a user
   const {mutate, isLoading} = useMutation(signUpUser, {
     onSuccess: () => {
-      window.location.href = "/login"
+      setError({
+        isError: false,
+        errorMessage: null
+      })
+      router.push("/login")
     },
     onError: (axiosError: any) => {
       setError({
@@ -98,7 +103,8 @@ const Register = () => {
         <form onSubmit={handleSignup} 
         className="flex items-center justify-center h-screen sm:w-1/2 w-full pr-10">
           <Flex direction="column" gap="3rem">
-            <Flex direction='column'>
+            <Flex direction='column' position="relative">
+              <Image src={hairyKnotImg} className="sm:hidden flex absolute w-[10rem] top-0" alt="" />
               <h1 className="lg:text-8xl md:text-7xl sm:text-6xl text-7xl text-[#23616F] font-[800] ">Hi there!</h1>
               <span className="md:text-sm text-xs text-[#343333] font-normal ">Sign up to IconAI and enjoy our free plan!</span>
             </Flex>
@@ -142,7 +148,9 @@ const Register = () => {
                 <Flex direction="column" gap="0.5rem" alignItems="start">
                   <button
                   type="submit" 
-                  className="py-2 px-10 rounded-full text-white bg-[#23616F] shadow-lg hover:px-14 transition-all">Submit</button>
+                  className="py-2 px-10 rounded-full text-white bg-[#23616F] shadow-lg hover:px-14 transition-all">
+                    {isLoading ? <Spinner /> : "Submit"} 
+                  </button>
                   <span className="text-sm text-[#676565] ">Already have an account ? <Link href="/login">Login</Link></span>
                 </Flex>
               </Flex>
