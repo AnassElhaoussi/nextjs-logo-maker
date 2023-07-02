@@ -52,7 +52,7 @@ const Login = () => {
   };
   return (
     <main
-      className="flex w-full bg-gradient-to-b from-[#e9e9e9] to-white gap-10"
+      className="flex flex-row-reverse w-full bg-[#F4E8F5] gap-10"
       style={poppins.style}
     >
       <div className="relative sm:flex hidden items-center justify-center h-screen w-1/2 ">
@@ -63,7 +63,7 @@ const Login = () => {
             className="relative z-1 w-[32rem] z-10"
           />
         </div>
-        <div className="absolute -z-1 left-1/3 w-1/2 md:h-[32rem] h-[20rem] bg-[#23616F] rounded-[2rem] shadow-2xl"></div>
+        <div className="absolute -z-1 left-1/3 w-1/2 md:h-[32rem] h-[20rem] bg-[#836194] rounded-[2rem] shadow-2xl"></div>
       </div>
       <form
         onSubmit={handleLogin}
@@ -71,12 +71,11 @@ const Login = () => {
       >
         <Flex direction="column" gap="3rem">
           <Flex direction="column">
-            <h1 className="lg:text-8xl md:text-7xl sm:text-6xl text-7xl text-[#23616F] font-[800] ">
-              Welcome!!!
+            <h1 className="lg:text-8xl md:text-7xl sm:text-6xl text-7xl text-[#836194] font-[800] ">
+              Welcome!
             </h1>
             <span className="md:text-sm text-xs text-[#343333] font-normal ">
-              Login to IconAI by using your credentials or social media
-              providers
+              Continue your sign-in process by entering your credentials or choosing a social media provider
             </span>
           </Flex>
           <Flex direction="column" gap="1.5rem" className="w-[20rem] ">
@@ -90,7 +89,7 @@ const Login = () => {
                 value={user.email}
                 onChange={onChange}
                 placeholder="Enter your email"
-                className="py-2 px-6 outline-none rounded-full bg-[#ececec] placeholder:text-sm"
+                className="py-2 px-6 outline-none rounded-full bg-[#EEDDF2] placeholder:text-sm"
               />
             </Flex>
             <Flex direction="column" gap="0.5rem">
@@ -103,14 +102,14 @@ const Login = () => {
                 value={user.password}
                 onChange={onChange}
                 placeholder="Create a password"
-                className="py-2 px-6 outline-none rounded-full bg-[#ececec] placeholder:text-sm"
+                className="py-2 px-6 outline-none rounded-full bg-[#EEDDF2] placeholder:text-sm"
               />
             </Flex>
             {error && <span className="text-red-400 text-sm ">{error}</span>}
             <Flex direction="column" gap="0.5rem" alignItems="start">
               <button
                 type="submit"
-                className="py-2 px-10 rounded-full text-white bg-[#23616F] shadow-lg hover:px-14 transition-all"
+                className="py-2 px-10 rounded-full text-white bg-[#836194] shadow-lg hover:px-14 transition-all"
               >
                 Submit
               </button>

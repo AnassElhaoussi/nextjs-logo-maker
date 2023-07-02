@@ -29,7 +29,10 @@ export async function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith('/dashboard')) {
         withAuth({
             callbacks: {
-                authorized: ({token}) => !!token
+                authorized: ({token}) => !!token, 
+            },
+            pages: {
+                signIn: "/login",
             }
         })
     }
