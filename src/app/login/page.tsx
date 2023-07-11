@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Flex } from "@chakra-ui/react";
 import { abstShapeImg } from "@/assets";
-import { poppins } from "../fonts";
 
 const Login = () => {
   const [user, setUser] = useState<{ email: string; password: string }>({
@@ -53,7 +52,6 @@ const Login = () => {
   return (
     <main
       className="flex flex-row-reverse w-full bg-[#F4E8F5] gap-10"
-      style={poppins.style}
     >
       <div className="relative sm:flex hidden items-center justify-center h-screen w-1/2 ">
         <div className="pl-10">

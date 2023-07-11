@@ -8,13 +8,7 @@ import {Flex, Button} from '@chakra-ui/react'
 import Image from "next/image";
 import { hairyKnotImg } from "@/assets";
 import Link from "next/link";
-import {Poppins} from "next/font/google"
 import { Spinner } from "@chakra-ui/react";
-
-export const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ['latin']
-})
 
 const Register = () => {
   const [user, setUser] = useState<{
@@ -93,7 +87,7 @@ const Register = () => {
 
 
   return (
-      <main className="flex w-full bg-gradient-to-b from-[#e9e9e9] to-white gap-10" style={poppins.style}>
+      <main className="flex w-full bg-gradient-to-b from-[#e9e9e9] to-white gap-10">
         <div className="relative sm:flex hidden items-center justify-center h-screen w-1/2 ">
           <div className="pl-10">
             <Image alt="signup_form_image" src={hairyKnotImg} className="relative z-1 w-[32rem] z-10" />

@@ -1,9 +1,7 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
 import { NextAuthProvider } from '@/providers/NextAuthProvider'
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider'
-
-const inter = Inter({ subsets: ['latin'] })
+import {inter} from './fonts/index'
 
 export const metadata = {
   title: 'AILogo',
